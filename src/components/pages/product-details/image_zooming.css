@@ -1,0 +1,21 @@
+.zoom_img{
+    object-fit: cover;
+        object-position:  0;
+        overflow: hidden;
+}
+
+.zoom_img::after{
+    display: var(--display);
+    content: '';
+    width: 100%;
+    height: 100%;
+    /* background-color: #000; */
+    /* background-image: var(--url); */
+    /* background-image: url(image/1.jpeg); */
+    background-size: 200%;
+    /* background-position: var(--zoom-x) var(--zoom-y); */
+    position: absolute;
+    top: 0;
+    left: 0;
+
+ }

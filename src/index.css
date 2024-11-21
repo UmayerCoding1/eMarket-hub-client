@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+margin:0;
+padding: 0;
+box-sizing: border-box;
+text-decoration: none;
+list-style: none;
+
+/* font-family: "Poppins", sans-serif */
+font-family: "Roboto", sans-serif;
+}
+html,body{
+height: 100%;
+width: 100%;
+}
+
+a.active{
+    color:  #6D4AAE;
+    border-bottom: 2px solid  #6D4AAE;
+}
+
+
+.swiper {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .swiper-slide {
+    font-size: 18px;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+  }
+
+  li{
+    cursor: pointer;
+  }
+
+  .add-to-cart{
+    display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #fe9249, #ff7b00);
+  color: #ffffff;
+  font-size: 16px;
+  
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  clip-path: polygon(20px 0%, 100% 0%, 100% 100%, 0% 100%); 
+  }
+
+  
