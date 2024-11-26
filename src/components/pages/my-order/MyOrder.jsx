@@ -22,7 +22,7 @@ const MyOrder = () => {
   const allItem = order.flatMap((item) => item.item);
 
   const invoice = Date();
-  console.log(order);
+
   
 
   return (

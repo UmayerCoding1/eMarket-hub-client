@@ -38,8 +38,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const {
     _id,
-    image,
-    imgD,
+    imageFiles,
     rating,
     size,
     product_RAM,
@@ -66,10 +65,10 @@ const ProductDetails = () => {
   useEffect(() => {
 
     document.body.style.overflow = isCartDialogOpen ? 'hidden' : 'auto';
-    setImgZoom(image);
+    setImgZoom(imageFiles[1]);
     setSelectedSize('');
     setQuantity(1);
-  },[isCartDialogOpen,imgD,image,product])
+  },[isCartDialogOpen,imageFiles,product])
 
   const handleIncrement = () => {
       if(quantity < stock){
@@ -90,7 +89,7 @@ const ProductDetails = () => {
 
   const handleAddToCart = () => {
     
-    if (size && !selectedSize) {
+    if (size.length >  0 && !selectedSize) {
       return toast.custom(
         (t) => (
           <div className="flex items-center">
@@ -103,7 +102,7 @@ const ProductDetails = () => {
       setIsConfirm(true);
     } else {
       setAdding(true);
-      const addItem = {product_name,image,size: selectedSize,quantity,product_id: _id,user_email: user.email,brand,price,discountPrice: newPrice,discount};
+      const addItem = {product_name,image: imageFiles[1],size: selectedSize,quantity,product_id: _id,user_email: user.email,brand,price,discountPrice: newPrice,discount};
 
       if(quantity  + addedProduct?.quantity > 15){
         setAdding(false);
@@ -137,28 +136,7 @@ const ProductDetails = () => {
   const handleSetImage = (img) => {
     setImgZoom(img);
   }
-  const handleImageZoomE = (event) => {
-    const zoomImg = zoomResult.current;
-    const pointer = productImg.current.getBoundingClientRect();
-    const zoomX = event.clientX - pointer.left;
-    const zoomY = event.clientY - pointer.top;
-
-    const level = 2;
-    const positionX =-zoomX * (level - 1);  
-    const positionY =-zoomY * (level - 1);  
-
-    zoomImg.style.display = 'block'
-    zoomImg.style.backgroundImage = `url(${imgZoom})`;
-    zoomImg.style.backgroundSize = `${zoomImg.width * level}px ${zoomImg.height * level}px`;
-    zoomImg.style.backgroundPosition = `${positionX}px ${positionY}px`;
-    zoomImg.style.backgroundRepeat = 'no-repeat'
-
-  }
-  
-  const handleImageZoomL = () => {
-     const zoomImg = zoomResult.current;
-    zoomImg.style.display = ''
-  }
+ 
 
 
 
@@ -179,19 +157,19 @@ const ProductDetails = () => {
       <div className=" lg:flex  h-s  relative mt-2 border-b-2 border-black pb-5">
         <div className="">
           <div className="flex items-center justify-center lg:block">
-            <img ref={productImg} onMouseMove={(e) => handleImageZoomE(e)} onMouseLeave={(e) => handleImageZoomL(e)} className="h-80 p-2 lg:p-0 lg:w-80 hover:cursor-zoom-in" src={imgZoom} alt="" />
+            <img ref={productImg} className="h-80 p-2 lg:p-0 lg:w-80 " src={imgZoom} alt="" />
           </div>
           <div className="flex items-center mt-4 gap-2">
             <img
-             onMouseEnter={() => handleSetImage(image)}
+             onMouseEnter={() => handleSetImage(imageFiles[1])}
               className="w-20 h-20 rounded-lg cursor-pointer border"
-              src={image}
+              src={imageFiles[1]}
               alt=""
             />
             <img
-             onMouseEnter={() => handleSetImage(imgD)}
+             onMouseEnter={() => handleSetImage(imageFiles[0])}
               className="w-20 h-20 rounded-lg cursor-pointer border"
-              src={imgD}
+              src={imageFiles[0]}
               alt=""
             />
           </div>
@@ -219,11 +197,11 @@ const ProductDetails = () => {
               <p className="text-xs text-blue-700 font-bold">(20)review</p>
             </div>
             <div className="mt-2">
-              <p className="text-2xl text-orange-500">৳ {price - newPrice}</p>
-              <p>
+              <p className="text-2xl text-orange-500">৳ {parseInt(price - newPrice)}</p>
+              {discount > 0 ?<p>
                 <span className="line-through  text-red-500">৳ {price}</span>{" "}
                 <span>-{discount}%</span>
-              </p>
+              </p> : ''}
             </div>
             {product?.description ? 
               <p className="text-xs lg:my-2">{description}</p>
@@ -255,6 +233,16 @@ const ProductDetails = () => {
              : 
               ""
             }
+
+{stock > 0 ? 
+                <button className="text-xs bg-[#a3f3b896] w-20 lg:my-6 rounded-3xl">
+                  IN STOCK
+                </button>
+               : 
+                <button className="text-xs bg-[#f3a3a396] w-28 my-6 rounded-3xl">
+                  OUT OF STOCK
+                </button>
+             }
             <div className="flex items-center gap-5 lg:mt-5">
               <p>Quantity</p>
 
@@ -278,15 +266,7 @@ const ProductDetails = () => {
                   +
                 </button>
               </div>
-              {stock > 0 ? 
-                <button className="text-xs bg-[#a3f3b896] w-20 lg:my-6 rounded-3xl">
-                  IN STOCK
-                </button>
-               : 
-                <button className="text-xs bg-[#f3a3a396] w-28 my-6 rounded-3xl">
-                  OUT OF STOCK
-                </button>
-             }
+              {stock < 10 && <p className="text-[10px] text-gray-500">Only {stock} item left</p>}
             </div>
             <div className="hidden lg:block">
               <div className="flex items-center gap-4 lg:mt-5">

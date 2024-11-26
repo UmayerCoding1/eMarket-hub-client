@@ -4,16 +4,16 @@ import CurrencyBtn from '../../../../shared/currency/CurrencyBtn';
 import { Rating } from '@mui/material';
 
 const ListCard = ({product}) => {
-    const { _id, product_name, discount, price, rating, image, stock, location } =
+    const { _id, product_name, discount, price, rating, imageFiles, stock, location } =
     product;
-  const newPrice = (price * discount) / 100;
+  const newPrice = parseInt((price * discount) / 100);
   
     return (
         
             <Link to={`/product/${_id}`}>
       <div className="border w-full h-[200px] cursor-pointer hover:shadow-2xl flex items-center mt-2 relative">
         <div className="w-1/2 h-full lg:w-1/4">
-          <img className="w-full h-full cover" src={image} alt="" />
+          <img className="w-full h-full cover" src={imageFiles[1]} alt="" />
         </div>
 
         <div className="p-3">

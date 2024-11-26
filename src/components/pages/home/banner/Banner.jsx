@@ -44,7 +44,7 @@ const Banner = () => {
             >
               {memoizedBanner.map((item, i) => (
                 <SwiperSlide key={i}>
-                  <img className="lg:p-7" src={item.img} alt="" />
+                  <img className="lg:" src={item.img} alt="" />
                 </SwiperSlide>
               ))}
             </Swiper>

@@ -63,13 +63,13 @@ const ShopCart = ({item,refetch}) => {
       </Link>
       <div className="flex justify-between">
         <div className="flex flex-col lg:gap-2 items-center mr-10">
-          <p className="text-2xl text-orange-500">৳{price - discountPrice}</p>
+          <p className="text-2xl text-orange-500">৳{parseInt(price - discountPrice)}</p>
           <p className="text-gray-500 ">
             <samp className="line-through">৳{price}</samp>{" "}
             <span>-{discount}%</span>
           </p>
           <p className="hidden lg:block">
-            TOTAL: ৳{(price - discountPrice) * quantity}
+            TOTAL: ৳{parseInt((price - discountPrice) * quantity)}
           </p>
         </div>
 

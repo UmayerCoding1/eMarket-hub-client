@@ -293,9 +293,9 @@ const Navbar = ({ handleTheme, darkTheme }) => {
                       className="mt-5 flex cursor-pointer parCa hover:text-blue-400"
                       key={i}
                     >
-                      <img className="w-5 mr-2" src={item.img} />
+                      
                       {item.name}
-                    </li>,
+                    </li>
                   ];
                 })}
               </ul>

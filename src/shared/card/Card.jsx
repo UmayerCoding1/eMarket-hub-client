@@ -4,16 +4,17 @@ import CurrencyBtn from "../currency/CurrencyBtn";
 import { Link } from "react-router-dom";
 
 const Card = ({ product }) => {
-  const { _id, product_name, discount, price, rating, image, stock, location } =
+  const { _id, product_name, discount, price, rating, imageFiles, stock, location } =
     product;
-  const newPrice = (price * discount) / 100;
+  const newPrice = parseInt((price * discount) / 100);
   const name = product_name?.slice(0, 10);
+console.log(imageFiles);
 
   return (
     <Link to={`/product/${_id}`}>
       <div className="border w-full  h-[280px] cursor-pointer hover:shadow-2xl relative lg:w-[90%]">
         <div className="w-full h-[60%] ">
-          <img className="w-full h-full cover" src={image} alt="" />
+          <img className="w-full h-full cover" src={imageFiles[1]} alt="" />
         </div>
 
         <div className="p-3">

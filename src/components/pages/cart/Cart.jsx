@@ -24,7 +24,7 @@ const Cart = () => {
   );
   const addItemCount = cart.reduce((totalItem,product) => totalItem + product.quantity,0 );
   const shippingFee = cart.length > 0 ? 60 : 0;
-  const subTotal = totalPrice + shippingFee;
+  const subTotal = parseInt(totalPrice + shippingFee);
 
 
  
@@ -55,7 +55,7 @@ const Cart = () => {
           <h2 className="text-xl">Order-summary</h2>
           <p className="flex items-center justify-between text-[15px] text-gray-500 mt-4">
             <span>Subtotal ({cart?.length} items)</span>{" "}
-            <span className="text-black">৳{totalPrice}</span>
+            <span className="text-black">৳{parseInt(totalPrice)}</span>
           </p>
           <p className="flex items-center justify-between text-[15px] text-gray-500 mt-4">
             <span>Shipping Fee: </span>{" "}

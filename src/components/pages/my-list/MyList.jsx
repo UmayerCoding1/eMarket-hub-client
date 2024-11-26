@@ -17,14 +17,14 @@ const MyList = () => {
 
       <div className="max-w-6xl mx-auto">
         {myFavList?.map((product) => {
-            const {_id,image,product_name,brand,price} = product;
+            const {_id,imageFiles,product_name,brand,price} = product;
             
           return [
             
             <div key={_id} className="flex items-center justify-between bg-white p-2 my-2">
               <Link to={`/product/${_id}`}>
               <div className="flex">
-                <img className="w-28"  src={image} alt="" />
+                <img className="w-28"  src={imageFiles[1]} alt="" />
                 <div>
                     <h2 className="text-2xl">{product_name}</h2>
                     <p className="text-xs">Brand: {brand}</p>
