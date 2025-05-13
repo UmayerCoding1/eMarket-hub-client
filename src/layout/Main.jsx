@@ -4,6 +4,7 @@ import Navbar from "../shared/navbar/Navbar";
 import Footer from "../shared/footer/Footer";
 import "./main.css";
 import AddedItemCount from "../shared/added-item-count/AddedItemCount";
+import { Toaster } from "react-hot-toast";
 const Main = () => {
   const [darkTheme, setDarkTheme] = useState(false);
 
@@ -28,6 +29,8 @@ const Main = () => {
       </div>
       <Footer />
       <p className="text-xs text-center">&copy; EMarket Hub 2024</p>
+
+      <Toaster containerStyle={false} position="top-right"/>
     </div>
   );
 };

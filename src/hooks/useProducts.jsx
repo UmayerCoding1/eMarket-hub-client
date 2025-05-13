@@ -1,5 +1,5 @@
 import useAxiosPublic from "./useAxiosPublic";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 const useProducts = (searchQuery, priceSort, selectCategory) => {
   const axiosPublic = useAxiosPublic();
@@ -19,6 +19,8 @@ const useProducts = (searchQuery, priceSort, selectCategory) => {
   });
 
   // const memoizedProduct = useMemo(() => products,[products]);
+  // console.log(products);
+  
   return [products, loading];
 };
 

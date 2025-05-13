@@ -10,7 +10,7 @@ const AuthProvider = ({children}) => {
    const [loading,setLoading] = useState(true);
    const axiosPublic = useAxiosPublic();
    const googleProvider = new GoogleAuthProvider();
-
+  
    const createUser = (email,password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth,email,password);

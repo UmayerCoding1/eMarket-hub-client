@@ -1,7 +1,7 @@
 import React from "react";
 import useAddress from "../../../../hooks/useAddress";
 import useCart from "./../../../../hooks/useCart";
-
+import Loading from "../../../../shared/loading/Loading";
 const CheckoutProduct = () => {
   const [address, loading] = useAddress();
   const [cart] = useCart();
@@ -15,7 +15,7 @@ const CheckoutProduct = () => {
   } = address;
 
   if (loading) {
-    return <p>loading......</p>;
+    return <Loading />;
   }
   return (
     <div>
@@ -87,9 +87,7 @@ const CheckoutProduct = () => {
                   </p>
                 </div>
 
-                <div>
-                    deleted
-                </div>
+               
 
 
 

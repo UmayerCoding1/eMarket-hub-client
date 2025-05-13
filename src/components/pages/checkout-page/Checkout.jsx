@@ -5,7 +5,6 @@ import useAuth from './../../../hooks/useAuth';
 import useDivisions from '../../../hooks/useDivisions';
 import useDistricts from '../../../hooks/useDistricts';
 import useUpazila from '../../../hooks/useUpazila';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import toast, { Toaster } from 'react-hot-toast';
 import useAddress from '../../../hooks/useAddress';
 import { Helmet } from 'react-helmet';
@@ -13,6 +12,7 @@ import useCart from '../../../hooks/useCart';
 import { Button } from '@mui/material';
 import CheckoutProduct from './chechout-product/CheckoutProduct';
 import CheckoutBtn from '../../../shared/checkout-btn/CheckoutBtn';
+import axios from 'axios';
 const voucherCode = 1745;
 const discountTk = 35;
 
@@ -31,7 +31,6 @@ const Checkout = () => {
    const [divisions] = useDivisions();
    const [districts] = useDistricts(division);
    const [upazilas] = useUpazila(city);
-   const axiosSecure = useAxiosSecure();
    const [address,,refetch] = useAddress();
    const [cart] = useCart();
 
@@ -55,7 +54,7 @@ const Checkout = () => {
     const userAddress = {fullName,userEmail: user?.email,userRegion,phoneNumber,userCity,houseLocation,userArea,locality,address,selectDelivery}
     Object.setPrototypeOf(userAddress, null)
 
-    axiosSecure.post('/addresses',userAddress)
+    axios.post('https://e-market-hub-server.onrender.com/addresses',userAddress)
     .then(res => {
       if(res.data.insertedId){
          toast.success('Address add successfully');
@@ -103,13 +102,17 @@ const Checkout = () => {
    discountTk:  voucher === voucherCode ? 35 : 0,
    shippingFee
   }
-   axiosSecure.post('/order', orderInfo)
+   axios.post('https://e-market-hub-server.onrender.com/order', orderInfo,{
+    headers: {
+      'authorization': `Bearer ${localStorage.getItem("eMarketHub-Access-Token")}`
+    }
+   })
    .then(res => {
     window.location.replace(res.data.url);
     })
  }
   
-  console.log(isArea);
+  
   
   
     return (

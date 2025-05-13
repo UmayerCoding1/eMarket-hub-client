@@ -3,8 +3,9 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
-  baseURL: import.meta.env.VITE_BASEURL
-  // baseURL: "http://localhost:8000",
+  // baseURL: import.meta.env.VITE_BASEURL
+  baseURL: "https://e-market-hub-server.onrender.com",
+  withCredentials: true,
 });
 const useAxiosSecure = () => {
   const {logout} = useAuth();
@@ -15,7 +16,7 @@ const useAxiosSecure = () => {
 
   axiosSecure.interceptors.request.use(function (config) {
     const token = localStorage.getItem("eMarketHub-Access-Token");
-
+    console.log(token);
     config.headers.authorization = `Barer ${token}`;
     return config;
   }),
@@ -23,19 +24,19 @@ const useAxiosSecure = () => {
     return Promise.reject(error);
   };
 
-  axiosSecure.interceptors.response.use((response) => {
-      return response;
-    },
-    async (error) => {
-      const status = error.response.status;
-      if(status === 404) {
-        console.log("status error in the interceptors", error);
-         logout();
-         await navigate('/sign-in')
-      }
-      return Promise.reject(error);
-    }
-  )
+  // axiosSecure.interceptors.response.use((response) => {
+  //     return response;
+  //   },
+  //   async (error) => {
+  //     const status = error.response.status;
+  //     if(status === 404) {
+  //       console.log("status error in the interceptors", error);
+  //       //  logout();
+  //       //  await navigate('/sign-in')
+  //     }
+  //     return Promise.reject(error);
+  //   }
+  // )
 
   return axiosSecure;
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import useAxiosPublic from './useAxiosPublic';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const useDistricts = (division) => {
     const axiosPublic = useAxiosPublic();

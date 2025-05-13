@@ -9,6 +9,9 @@ import CheckoutBtn from "../../../shared/checkout-btn/CheckoutBtn";
 import { Link } from "react-router-dom";
 import Loading from "../../../shared/loading/Loading";
 import  { AddedCount } from "../../../shared/added-item-count/AddedItemCount";
+import useAuth from "../../../hooks/useAuth";
+import axios from "axios";
+import {toast} from 'react-hot-toast'
 // import AddedItemCount, { AddedCount } from "../../../shared/added-item-count/AddedItemCount";
 
 
@@ -16,6 +19,7 @@ import  { AddedCount } from "../../../shared/added-item-count/AddedItemCount";
 const Cart = () => {
   const [cart,loading,refetch] = useCart();
   const containerRef = useRef();
+  const {user} = useAuth();
 
   const totalPrice = cart.reduce(
     (total, item) =>
@@ -27,7 +31,25 @@ const Cart = () => {
   const subTotal = parseInt(totalPrice + shippingFee);
 
 
- 
+  const handleDelete = async() => {
+    try {
+      const res = await axios.delete(`https://e-market-hub-server.onrender.com/delete-all-cart?email=${user?.email}`,
+        {
+          headers: {
+            'authorization': `Bearer ${localStorage.getItem("eMarketHub-Access-Token")}`
+          }
+        }
+      );
+
+      if(res.data.deletedCount > 0){
+        toast.success("All items deleted from cart");
+        refetch();
+      }
+     
+    } catch (error) {
+      console.log(error);
+    }
+  }
    if(loading){
     
     return <Loading/>
@@ -40,7 +62,7 @@ const Cart = () => {
       </Helmet>
       <div className="flex items-center justify-between my-5">
         <p>TOTAL ITEM: {cart?.length || 0}</p>
-        <Button variant="contained" color="error">
+        <Button onClick={handleDelete} variant="contained" color="error">
           <DeletedIcon />
         </Button>
       </div>

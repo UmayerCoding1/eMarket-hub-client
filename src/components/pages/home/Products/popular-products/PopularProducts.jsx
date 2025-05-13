@@ -8,6 +8,7 @@ const PopularProducts = () => {
     const [products,loading] = useProducts('','','');
     const popularItem = products.slice(0,4);
     
+ 
     
 
     if(loading){
@@ -15,7 +16,7 @@ const PopularProducts = () => {
     }
     
     return (
-        <section className='mt-2 ml-2'>
+        <section className='mt-16 ml-2 '>
             <div className='flex items-center justify-between mr-5'>
                 <div>
                 <h2 className='text-xl font-bold'>Popular Products</h2>

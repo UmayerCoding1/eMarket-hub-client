@@ -68,52 +68,12 @@ const Navbar = ({ handleTheme, darkTheme }) => {
           Shop
         </NavLink>
       </li>
-      <li
-        onClick={() => setShowNav(!showNav)}
-        className="mr-4 mt-5 text-[15px] font-[500] lg:mr-10 "
-      >
-        <NavLink className="flex items-center" to={"/event"}>
-          <button className="mr-1">
-            <EventIcon />
-          </button>{" "}
-          Event
-        </NavLink>
-      </li>
-      <li
-        onClick={() => setShowNav(!showNav)}
-        className="mr-4 mt-5 text-[15px] font-[500] lg:mr-10 "
-      >
-        <NavLink className="flex items-center" to={"/blog"}>
-          <button className="mr-1">
-            <BlogIcon />
-          </button>{" "}
-          Blog
-        </NavLink>
-      </li>
-      <li
-        onClick={() => setShowNav(!showNav)}
-        className="mr-4 mt-5 text-[15px] font-[500] lg:mr-10 "
-      >
-        <NavLink className="flex items-center" to={"/about-us"}>
-          <button className="mr-1">
-            <AboutIcon />
-          </button>{" "}
-          About Us
-        </NavLink>
-      </li>
-      <li
-        onClick={() => setShowNav(!showNav)}
-        className="mr-4 mt-5 text-[15px] font-[500] lg:mr-10 "
-      >
-        <NavLink className="flex items-center" to={"/contact-us"}>
-          <button className="mr-1">
-            <ContactIcon />
-          </button>{" "}
-          Contact Us
-        </NavLink>
-      </li>
+     
     </>
   );
+
+  // console.log(cart);
+  
 
   
 

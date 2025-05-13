@@ -17,8 +17,12 @@ const Products = () => {
             <div className='mt-2 bg-white'>
             <NewProducts/>
             </div>
-            <div className='hidden bg-white lg:block'>
+            {/* <div className='hidden h-96 bg-white lg:block'>
             <BottomBanner/>
+            </div> */}
+
+            <div className='h-96 bg-white'>
+                <BottomBanner/>
             </div>
            </div>
         </div>

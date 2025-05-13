@@ -5,7 +5,7 @@ import useDaley from "../../../../../hooks/useDaley";
 
 const Daley = () => {
   const [memoizedDaley] = useDaley();
-
+  console.log(memoizedDaley);
   return (
     <div className="hidden   lg:block ">
       {memoizedDaley.map((item) => (
@@ -14,13 +14,13 @@ const Daley = () => {
             <img
               className="w-8 h-8 rounded-full absolute "
               src={item?.company_logo || ""}
-              alt=""
+              alt="s"
             />
           ) : (
             ""
           )}
           <div className="w-[60] flex flex-col justify-evenly flex-grow">
-            <img className="w-full" src={item.product_img} alt="" />
+            <img className="w-full" src={item.product_img} alt="ss" />
           </div>
 
           <div className="w-">

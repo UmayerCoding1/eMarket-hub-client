@@ -8,7 +8,7 @@ const Card = ({ product }) => {
     product;
   const newPrice = parseInt((price * discount) / 100);
   const name = product_name?.slice(0, 10);
-console.log(imageFiles);
+// console.log(imageFiles);
 
   return (
     <Link to={`/product/${_id}`}>

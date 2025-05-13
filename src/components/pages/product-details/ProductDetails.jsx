@@ -17,6 +17,7 @@ import useCart from "../../../hooks/useCart";
 import RelatedProducts from "./related-product/RelatedProducts";
 import {  FaAngleDoubleLeft  } from "react-icons/fa";
 import useMyList from "../../../hooks/useMyList";
+import axios from "axios";
 // import { toast } from 'react-hot-toast';
 const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState("");
@@ -28,7 +29,7 @@ const ProductDetails = () => {
   const [adding,setAdding] = useState(false);
   const [imgZoom,setImgZoom] = useState(null);
   const product = useLoaderData();
-  const [products, loading] = useProducts('','','');
+  const [products] = useProducts('','','');
   const { user } = useAuth();
   const productImg = useRef(null);
   const zoomResult = useRef(null);
@@ -36,6 +37,27 @@ const ProductDetails = () => {
   const [myList] = useMyList();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  
+
+  // const product = {
+  //   _id: '67489c9b19379a4d56de393d',
+  //   product_name: 'Texpark Combed Cotton Half Sleeve T Shirt For Men - White - TS-20',
+  //   description: 'The Texpark Combed Cotton Half Sleeve T-Shirt For Men. It is a comfortable and stylish t-shirt made of 100% combed cotton. It has a ribbed lycra neck for a better fit. It is available in a variety of colors and sizes. The Texpark Combed Cotton Half Sleeve T-Shirt For Men is a great option for everyday wear. It is also a good choice for casual occasions.',
+  //   price: '450',
+  //   discount: '11',
+  //   product_RAM: '',
+  //   brand: 'T-Shirts',
+  //   stock: 19,
+  //   category: 'Fashion',
+  //   subCategory: 'Men',
+  //   size: [ 'S', 'M', 'L' ],
+  //   location: 'bangladesh',
+  //   imageFiles: [
+  //     'http://res.cloudinary.com/dlh8axija/image/upload/v1732811929/ypl2d9yr9llotczpeywf.png',
+  //     'http://res.cloudinary.com/dlh8axija/image/upload/v1732811927/uecogwd7mmf7xqa4rlpn.png'
+  //   ],
+  //   rating: 3
+  // }
   const {
     _id,
     imageFiles,
@@ -55,9 +77,11 @@ const ProductDetails = () => {
     (product) => product.category === category && product._id !== _id
   );
 
-  const addedProduct = Cart.find(product => product.product_id === _id);
+  const addedProduct = Cart?.find(product => product.product_id === _id);
   
+// console.log(imgZoom);
 
+ 
   
   
   
@@ -111,7 +135,7 @@ const ProductDetails = () => {
         setExtraQuantityAdd(quantity + addedProduct?.quantity || 0);
       //  return;
       }else{
-        axiosSecure.post('/cart', addItem)
+        axios.post('https://e-market-hub-server.onrender.com/cart', addItem)
         .then(res => {  
           if(res.data.insertedId || res.data.message){
             setAdding(false);
@@ -148,6 +172,7 @@ const ProductDetails = () => {
   }
 
   return (
+    
     <div className="max-w-6xl mx-auto relative ">
       <Helmet>
         <title>{product_name || 'eMarket hub'}...</title>
@@ -333,7 +358,7 @@ const ProductDetails = () => {
       <Link><button className="text-blue-400" onClick={() => setIsCartDialogOpen(!isCartDialogOpen)}><Close/></button></Link>
      </div>
    </div> :""}
-      <Toaster position="top-center" reverseOrder={false} />
+      
     </div>
   );
 };

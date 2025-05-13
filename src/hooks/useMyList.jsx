@@ -1,15 +1,22 @@
 import React from 'react';
-import useAxiosSecure from './useAxiosSecure';
-import { useQuery } from 'react-query';
+
+import { useQuery } from '@tanstack/react-query';
 import useAuth from './useAuth';
+import axios from 'axios';
 
 const useMyList = () => {
     const {user} = useAuth();
-    const axiosSecure = useAxiosSecure();
+
     const {data: myList = [],refetch}= useQuery({
-        queryKey: ['myList',user],
+        queryKey: ['myList',user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/my-list?email=${user?.email}`);
+            const res = await axios.get(`https://e-market-hub-server.onrender.com/my-list?email=${user?.email}`,
+                {
+                    headers: {
+                        'authorization': `Bearer ${localStorage.getItem("eMarketHub-Access-Token")}`
+                    }
+                }
+            );
             return res.data
         }
     })

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Loading from "../../../../../shared/loading/Loading";
 import useAxiosPublic from "../../../../../hooks/useAxiosPublic";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 const Ads = () => {
   const axiosPublic = useAxiosPublic();
@@ -18,13 +18,14 @@ const Ads = () => {
     },
   });
 
+  console.log(ads);
   if (isLoading) {
     refetch();
     return <Loading />;
   }
   return (
-    <div>
-      {ads.map((add) => (
+    <div className="mt-32">
+      {ads?.map((add) => (
         <img key={add._id} className="mb-5 shadow" src={add.add} />
       ))}
     </div>

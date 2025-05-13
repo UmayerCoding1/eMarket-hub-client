@@ -1,19 +1,27 @@
-import useAxiosSecure from './useAxiosSecure';
-import { useQuery } from 'react-query';
-import useAuth from './useAuth';
-import 'react-tabs/style/react-tabs.css';
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "./useAuth";
+import "react-tabs/style/react-tabs.css";
+import axios from "axios";
 const useOrder = (selectStatus) => {
-    const axiosSecure = useAxiosSecure();
-    const {user} = useAuth();
-    const {data: orders=[]} = useQuery({
-        queryKey: ['orders',selectStatus],
-        queryFn: async () => {
-            const res= await axiosSecure.get(`/orderUI?email=${user?.email}&status=${selectStatus}`);
-            return res.data;
+  const { user } = useAuth();
+  const { data: orders = [] } = useQuery({
+    queryKey: ["orders", selectStatus],
+    queryFn: async () => {
+      const res = await axios.get(
+        `https://e-market-hub-server.onrender.com/orderUI?email=${user?.email}&status=${selectStatus}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem(
+              "eMarketHub-Access-Token"
+            )}`,
+          },
         }
-    })
-    
-    return [orders]
+      );
+      return res.data;
+    },
+  });
+
+  return [orders];
 };
 
 export default useOrder;

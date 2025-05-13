@@ -4,7 +4,7 @@ import { DeletedIcon } from "../../../../provider/IconProvider";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
-
+import axios from "axios";
 const ShopCart = ({item,refetch}) => {
   const [updatedQuantity,setUpdatedQuantity] = useState(item.quantity);
   const axiosSecure = useAxiosSecure();
@@ -23,7 +23,7 @@ const ShopCart = ({item,refetch}) => {
 
   const handleCartItemDelete = (id) => {
     
-    axiosSecure.delete(`/cart/${id}`)
+    axios.delete(`https://e-market-hub-server.onrender.com/delete-cart/${id}`)
     .then(res => {
       console.log(res.data);
       if(res.data.deletedCount > 0){
